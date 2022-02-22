@@ -19,6 +19,7 @@ const getQuote = async () => {
            randomNumber === 146) {
         randomNumber = Math.floor(Math.random() * 224 + 1);
     }
+
     try {
         isAnimating = true;
 
@@ -45,7 +46,6 @@ const getQuote = async () => {
         CARD_HEADING.innerText = 'Sorry!';
         CARD_QUOTE.innerText = 'Couldn\'t find advice...';
     }
-    
 }
 
 CARD_BUTTON.addEventListener('click', getQuote);
