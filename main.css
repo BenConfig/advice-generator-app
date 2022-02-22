@@ -1,0 +1,123 @@
+/* ------------------------------------------------------ */
+/*                          Fonts                         */
+/* ------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap');
+
+/* ------------------------------------------------------ */
+/*                    Custom Properties                   */
+/* ------------------------------------------------------ */
+:root {
+    /* Colors */
+    --clr-primary: 193, 38%, 86%;
+    --clr-accent: 150, 100%, 66%;
+    --clr-card-bg: 219, 19%, 24%;
+    --clr-body-bg: 220, 22%, 16%;
+
+    /* Font Sizes */
+    --fs-quote-heading: clamp(.625rem, .375rem + 1.02vw, .75rem);
+    --fs-quote-text: clamp(1.4375rem, .9375rem + 2.03vw, 1.6875rem);
+
+    /* Border Radii */
+    --br-md: 1rem;
+    --br-pill: 100vmax;
+}
+
+/* ------------------------------------------------------ */
+/*                Resets and Global Styles                */
+/* ------------------------------------------------------ */
+* { box-sizing: border-box; }
+
+body, h1, p, button { margin: 0; }
+
+body {
+    display: grid;
+    min-height: 100vh;
+    font: 1rem/1.4125 'Manrope', sans-serif;
+    text-align: center;
+    padding: 1rem;
+    background: hsl(var(--clr-body-bg));
+}
+
+/* ------------------------------------------------------ */
+/*                          Card                          */
+/* ------------------------------------------------------ */
+.card {
+    position: relative;
+    width: min(100%, 33.75rem);
+    padding-top: clamp(2.5625rem, 1.625rem + 4.06vw, 3.0625rem);
+    padding-inline: clamp(1.5rem, -1.375rem + 12.18vw, 3rem);
+    padding-bottom: clamp(4.44rem, 3.49rem + 4.06vw, 4.94rem);
+    border-radius: var(--br-md);
+    margin: auto;
+    background: hsl(var(--clr-card-bg));
+}
+
+.card-heading {
+    font-size: var(--fs-quote-heading);
+    letter-spacing: .3875em;
+    text-transform: uppercase;
+    margin-bottom: 1.5625rem;
+    color: hsl(var(--clr-accent));
+    transition: opacity 500ms;
+}
+
+.card-quote {
+    position: relative;
+    font-size: var(--fs-quote-text);
+    letter-spacing: .01rem;
+    padding-bottom: clamp(2rem, .25rem + 7.61vw, 2.9375rem);
+    border-bottom: 1px solid hsla(var(--clr-primary), .5);
+    color: hsl(var(--clr-primary));
+    transition: opacity 500ms;
+}
+
+.card-quote::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 3.25rem;
+    height: 1.5rem;
+    background: hsl(var(--clr-card-bg)) url('images/pattern-divider-desktop.svg') no-repeat center;
+}
+
+.card-button {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0);
+    padding: 2rem;
+    border: none;
+    border-radius: var(--br-pill);
+    background: hsl(var(--clr-accent)) url('images/icon-dice.svg') no-repeat center;
+    cursor: pointer;
+}
+
+.card-button:focus { outline: none; }
+
+.card-button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 2rem hsla(var(--clr-accent), .75);
+    background: hsla(0, 100%, 100%, .1);
+    opacity: 0;
+    transition: opacity 250ms;
+}
+
+.card-button:hover::after,
+.card-button:focus::after { opacity: 1; }
+
+/* ------------------- Card Animation ------------------- */
+.card.animating > .card-heading,
+.card.animating > .card-quote {
+    transition: opacity 500ms;
+    opacity: 0;
+}
+
+.card.animating > .card-button  {
+    transition: transform 1000ms ease-in-out;
+    transform: translate(-50%, -50%) rotate(540deg);
+}
